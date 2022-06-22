@@ -31,6 +31,7 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-web') // 프로젝트 개발에 필요한 의존성 추가
+    compile('org.projectlombok:lombok') // 프로젝트에 '라이브러리' 롬복 추가
+    testCompile('org.springframework.boot:spring-boot-starter-test') // 프로젝트 개발에 필요한 의존성 추가
 }
