@@ -1,8 +1,12 @@
 package org.example.springboot.service.posts;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import org.example.springboot.domain.posts.Posts;
 import org.example.springboot.domain.posts.PostsRepository;
+import org.example.springboot.web.dto.PostsListResponseDto;
 import org.example.springboot.web.dto.PostsResponseDto;
 import org.example.springboot.web.dto.PostsSaveRequestDto;
 import org.example.springboot.web.dto.PostsUpdateRequestDto;
@@ -34,6 +38,14 @@ public class PostsService {
 
     }
 
+    @Transactional
+    public void delete (Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+
+        postsRepository.delete(posts);
+    }
+
     public PostsResponseDto findById(Long id) {
 
         Posts entity = postsRepository.findById(id)
@@ -41,5 +53,13 @@ public class PostsService {
 
         return new PostsResponseDto(entity);
 
+    }
+
+    // 트랜잭션 범위는 유지하면서 조회기능만 남겨줌
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto:: new)
+                .collect(Collectors.toList());
     }
 }

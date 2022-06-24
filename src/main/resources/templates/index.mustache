@@ -1,0 +1,43 @@
+{{! src/main/resources/template에 머스테치 파일을 두면 스프링 부트에서 자동으로 로딩한다}}
+
+{{>layout/header}}
+
+    <h1>스프링 부트로 시작하는 웹 서비스 Ver.2</h1>
+    <div class = "col-md-12">
+        <div class = "row">
+            <div class = "col-md-6">
+                {{! 페이지에 "글 등록" 이라는 이름의 버튼을 만들었다.}}
+                {{! 그 버튼을 누르면 /posts/save로 이동하도록 했다. }}
+                {{! 이 호출은 페이지와 관련있기 때문에 IndexController가 받는다. }}
+                <a href = "/posts/save" role = "button" class = "btn btn-primary">글 등록</a>
+            </div>
+        </div>
+        <br>
+        <!-- 목록 출력 영역 -->
+        <table class = "table table-horizontal table-bordered">
+            <thead class ="thead-strong">
+            <tr>
+                <th>게시글번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>최종수정일</th>
+            </tr>
+            </thead>
+            <tbody id = "tbody">
+            {{#posts}} <!-- posts라는 List를 순회한다 -->
+                <tr>
+                    <!-- List에 있는 posts의 객체인 id, title, author, modifiedDate를 사용함 -->
+                    <td>{{id}}</td>
+                    <!-- <td>{{title}}</td> -->
+                    <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                    <td>{{author}}</td>
+                    <td>{{modifiedDate}}</td>
+                </tr>
+            {{/posts}}
+            </tbody>
+        </table>
+    </div>
+
+
+
+{{>layout/footer}}
