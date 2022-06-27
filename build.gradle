@@ -37,5 +37,11 @@ dependencies {
                                                                      // 스프링 부트 버전에 맞춰 자동으로 jpa 관련 라이브러리의 버전을 관리
     compile('org.springframework.boot:spring-boot-starter-mustache') // 머스테치 스타터 의존성
     compile('com.h2database:h2') // 인메모리 관계형 DB. 메모리에서 실행됨. 그래서 어플 재시작할 때마다 초기화되서 테스트 용도로 많이 사용
+
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client') // 스프링 시큐리티 관련 의존성
+                                                                          // 클라이언트 입장에서 소셜 기능 구현 시 필요한 의존성
+    compile('org.springframework.session:spring-session-jdbc') // spring-session-jdbc 추가
     testCompile('org.springframework.boot:spring-boot-starter-test') // 프로젝트 개발에 필요한 의존성 추가
+    testCompile('org.springframework.security:spring-security-test') // 임의로 인증된 사용자를 추가하여 테스트
+                                                                     // status code가 302가 왔을 때 = 인증되지 않은 사용자 요청을 이동시켜서 생긴 오류
 }
